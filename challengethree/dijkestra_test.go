@@ -34,7 +34,7 @@ func TestFindMinimumLatencyPath_CompressionNodes(t *testing.T) {
 			expectedPath: 28,
 		},
 		{
-			name:         "No path between A and D without compression",
+			name:         "A and D without compression",
 			start:        "A",
 			end:          "D",
 			expectedPath: 30,
