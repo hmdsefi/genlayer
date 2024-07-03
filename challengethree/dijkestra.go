@@ -4,7 +4,7 @@ import (
 	"container/heap"
 )
 
-func Dijkstra(graph Graph, start, end string) []string {
+func FindMinimumLatencyPath(graph Graph, compressionNodes []string, start, end string) []string {
 	pq := make(PriorityQueue, 0)
 	heap.Init(&pq)
 
@@ -14,11 +14,17 @@ func Dijkstra(graph Graph, start, end string) []string {
 
 	previous := map[string]*Item{}
 
+	// Convert compression nodes to a map for quick lookup
+	compressionSet := make(map[string]bool)
+	for _, node := range compressionNodes {
+		compressionSet[node] = true
+	}
+
 	for pq.Len() > 0 {
 		current := heap.Pop(&pq).(*Item)
 
 		if current.node == end {
-			var path []string
+			path := []string{}
 			for current != nil {
 				path = append([]string{current.node}, path...)
 				current = previous[current.node]
@@ -27,6 +33,11 @@ func Dijkstra(graph Graph, start, end string) []string {
 		}
 
 		for _, edge := range graph[current.node] {
+			// Skip compression nodes
+			if compressionSet[edge.To] {
+				continue
+			}
+
 			newLatency := current.latency + edge.Latency
 			if priority, ok := initialPriority[edge.To]; !ok || newLatency < priority {
 				initialPriority[edge.To] = newLatency

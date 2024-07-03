@@ -15,8 +15,9 @@ func main() {
 
 	start := "A"
 	end := "D"
+	compressionNodes := []string{"B"}
 
-	path := Dijkstra(graph, start, end)
+	path := FindMinimumLatencyPath(graph, compressionNodes, start, end)
 	if path != nil {
 		fmt.Printf("fastest path from %s to %s: %v\n", start, end, path)
 	} else {
