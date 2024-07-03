@@ -4,6 +4,7 @@ import (
 	"fmt"
 )
 
+// Optimal Network Routing
 func main() {
 	graph := Graph{
 		"A": []Edge{{"B", 10}, {"C", 20}},

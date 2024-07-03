@@ -4,6 +4,7 @@ import (
 	"log"
 )
 
+// Data Fragmentation and Reconstruction Challenge
 func main() {
 	simpleHash := NewHash()
 	dataReconstructor := NewDataReconstructor(simpleHash)
