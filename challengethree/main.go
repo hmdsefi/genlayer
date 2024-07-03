@@ -15,7 +15,7 @@ func main() {
 
 	start := "A"
 	end := "D"
-	compressionNodes := []string{"B"}
+	compressionNodes := []string{"B", "C"}
 
 	path := FindMinimumLatencyPath(graph, compressionNodes, start, end)
 	if path != nil {

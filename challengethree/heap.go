@@ -1,23 +1,20 @@
 package main
 
-// Graph represents a graph with nodes and edges
 type Graph map[string][]Edge
 
-// Edge represents an edge between nodes with a latency
 type Edge struct {
 	To      string
 	Latency int
 }
 
-// Item represents an item in the priority queue
 type Item struct {
-	node     string
-	latency  int
-	priority int
-	index    int
+	node            string
+	latency         int
+	priority        int
+	index           int
+	usedCompression bool
 }
 
-// PriorityQueue implements heap.Interface and holds Items
 type PriorityQueue []*Item
 
 func (pq PriorityQueue) Len() int { return len(pq) }
