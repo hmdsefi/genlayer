@@ -17,9 +17,9 @@ func main() {
 	end := "D"
 	compressionNodes := []string{"B", "C"}
 
-	path := FindMinimumLatencyPath(graph, compressionNodes, start, end)
-	if path != nil {
-		fmt.Printf("fastest path from %s to %s: %v\n", start, end, path)
+	totalLatency := FindMinimumLatencyPath(graph, compressionNodes, start, end)
+	if totalLatency != 0 {
+		fmt.Printf("minimum total latency %d", totalLatency)
 	} else {
 		fmt.Printf("No path found from %s to %s\n", start, end)
 	}

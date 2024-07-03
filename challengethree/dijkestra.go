@@ -5,7 +5,7 @@ import (
 	"math"
 )
 
-func FindMinimumLatencyPath(graph Graph, compressionNodes []string, start, end string) []string {
+func FindMinimumLatencyPath(graph Graph, compressionNodes []string, start, end string) int {
 	pq := make(PriorityQueue, 0)
 	heap.Init(&pq)
 
@@ -21,6 +21,8 @@ func FindMinimumLatencyPath(graph Graph, compressionNodes []string, start, end s
 		compressionSet[node] = true
 	}
 
+	var totalLatency int
+
 	for pq.Len() > 0 {
 		current := heap.Pop(&pq).(*Item)
 
@@ -31,7 +33,7 @@ func FindMinimumLatencyPath(graph Graph, compressionNodes []string, start, end s
 				path = append([]string{current.node}, path...)
 				current = previous[current.node]
 			}
-			return path
+			return totalLatency
 		}
 
 		// Explore neighbors
@@ -49,6 +51,7 @@ func FindMinimumLatencyPath(graph Graph, compressionNodes []string, start, end s
 					}
 					previous[edge.To] = current
 					heap.Push(&pq, item)
+					totalLatency = newLatency
 				}
 			} else {
 				newLatency := current.latency + edge.Latency
@@ -62,10 +65,11 @@ func FindMinimumLatencyPath(graph Graph, compressionNodes []string, start, end s
 					}
 					previous[edge.To] = current
 					heap.Push(&pq, item)
+					totalLatency = newLatency
 				}
 			}
 		}
 	}
 
-	return nil
+	return totalLatency
 }
